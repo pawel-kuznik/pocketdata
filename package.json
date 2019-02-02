@@ -4,12 +4,18 @@
   "description": "An implementation for a object store. A small object store.",
   "main": "index.js",
   "directories": {
-    "lib": "lib",
-    "test": "mocha tests --recursive"
+    "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests --recursive"
   },
   "author": "Pawel Kuznik <pawel.kuznik@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "uuid": "^3.3.2"
+  }
 }
