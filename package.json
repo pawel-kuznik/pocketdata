@@ -1,0 +1,15 @@
+{
+  "name": "pocketdata",
+  "version": "1.0.0",
+  "description": "An implementation for a object store. A small object store.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "mocha tests --recursive"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pawel Kuznik <pawel.kuznik@gmail.com>",
+  "license": "ISC"
+}
