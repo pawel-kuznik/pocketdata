@@ -29,6 +29,25 @@ describe('ObjectStore', () => {
         });
     });
 
+    describe('.create()', () => {
+
+        it('should create a new instance of an Entity class', () => {
+        
+            // create a storage
+            let storage = new ObjectStore();
+            storage.register(A, 'a');
+
+            // create an object right away
+            let a = storage.create(A);
+
+            // try to get the object
+            let aSecond = storage.fetch(A, a.id);
+
+            // and make sure that we have the proper object with expected property
+            expect(aSecond).to.be.an('object').and.have.property('id').that.equals(a.id);
+        });
+    });
+
     describe('.store()', () => {
 
         it ('should store only registered entities', () => {
@@ -134,6 +153,18 @@ describe('ObjectStore', () => {
             store.store(a);
 
             expect(store.fetchAll(A)).to.be.an('array').and.be.not.empty;
+        });
+    });
+
+    describe('.toPlainObject()', () => {
+    
+        it ('should create an object when registered entoties', () => {
+        
+            let store = new ObjectStore();
+            store.register(A);
+            store.register(B);
+
+            expect(store.toPlainObject()).to.be.an('object');
         });
     });
 });

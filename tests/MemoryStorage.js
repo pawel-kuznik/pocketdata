@@ -10,6 +10,10 @@ const expect = require('chai').expect;
 // the class to test
 const MemoryStorage = require('../index.js').MemoryStorage;
 const ObjectStore = require('../index.js').ObjectStore;
+const Entity = require('../index.js').Entity;
+
+// a test entity class
+const A = class extends Entity { };
 
 // tell that we are testing the memory storage.
 describe('MemoryStorage', () => {
@@ -53,6 +57,39 @@ describe('MemoryStorage', () => {
                     expect(data).to.be.an('object');
 
                     // done
+                    done();
+                });
+            });
+        });
+
+        it('should work as a backend for the ObjectStore', () => {
+
+            // construct objects
+            let storage = new MemoryStorage();
+            let objectStore = new ObjectStore(storage);
+
+            // construct entity
+            objectStore.register(A, 'a');
+
+            // create a new object
+            let a = objectStore.create(A);
+
+            // push the data
+            objectStore.flush().then(() => {
+
+                // delete the test entity
+                objectStore.delete(a);
+            
+                // reload the object store
+                objectStore.reload().then(() => {
+
+                    // get the reloaded a
+                    let reloadedA = objectStore.fetch(A, a.id);
+
+                    // make sure that the ID matches
+                    expect(reloadedA.id).to.be.equal(a.id);
+
+                    // we are done
                     done();
                 });
             });
