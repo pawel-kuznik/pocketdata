@@ -6,5 +6,6 @@
 // export the library
 module.exports = {
     Entity:         require('./lib/Entity.js'),
-    ObjectStore:    require('./lib/ObjectStore.js')
+    ObjectStore:    require('./lib/ObjectStore.js'),
+    Storage:        require('./lib/Storage.js')
 };
