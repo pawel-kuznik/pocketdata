@@ -7,5 +7,6 @@
 module.exports = {
     Entity:         require('./lib/Entity.js'),
     ObjectStore:    require('./lib/ObjectStore.js'),
-    Storage:        require('./lib/Storage.js')
+    Storage:        require('./lib/Storage.js'),
+    MemoryStorage:  require('./lib/MemoryStorage.js')
 };
