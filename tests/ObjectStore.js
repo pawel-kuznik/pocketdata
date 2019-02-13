@@ -167,4 +167,28 @@ describe('ObjectStore', () => {
             expect(store.toPlainObject()).to.be.an('object');
         });
     });
+
+    describe('.reload()', () => {
+
+        it('should load the data properly', done => {
+
+            let store = new ObjectStore();
+            store.register(A);
+
+            let a = store.create(A);
+
+            store.flush();
+
+            store.delete(a);
+
+            store.reload().then(() => {
+
+                let a2 = store.fetch(A, a.id);
+
+                expect(a2).to.have.property('id').that.equals(a.id);
+
+                done();
+            });
+        });
+    });
 });

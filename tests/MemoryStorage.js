@@ -62,7 +62,7 @@ describe('MemoryStorage', () => {
             });
         });
 
-        it('should work as a backend for the ObjectStore', () => {
+        it('should work as a backend for the ObjectStore', (done) => {
 
             // construct objects
             let storage = new MemoryStorage();
