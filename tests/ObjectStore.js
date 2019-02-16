@@ -29,9 +29,31 @@ describe('ObjectStore', () => {
         });
     });
 
+    describe('.build()', () => {
+
+        it('should create a new instance of an Entity class and not store it', () => {
+
+            // create a storage
+            let storage = new ObjectStore();
+            storage.register(A, 'a');
+
+            // create an object right away
+            let a = storage.build(A);
+
+            // check if we have an instance
+            expect(a).to.instanceof(A);
+
+            // try to get the object
+            let aSecond = storage.fetch(A, a.id);
+
+            // we should not be able to fetch the instance yet
+            expect(aSecond).to.be.an('undefined');
+        });
+    });
+
     describe('.create()', () => {
 
-        it('should create a new instance of an Entity class', () => {
+        it('should create a new instance of an Entity class and store it', () => {
         
             // create a storage
             let storage = new ObjectStore();
@@ -44,7 +66,7 @@ describe('ObjectStore', () => {
             let aSecond = storage.fetch(A, a.id);
 
             // and make sure that we have the proper object with expected property
-            expect(aSecond).to.be.an('object').and.have.property('id').that.equals(a.id);
+            expect(aSecond).to.be.instanceof(A).and.have.property('id').that.equals(a.id);
         });
     });
 
