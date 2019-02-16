@@ -7,7 +7,7 @@
 const expect = require('chai').expect;
 
 // get the entity class 
-const Entity = require('../lib/Entity.js');
+const Entity = require('../index.js').Entity;
 
 
 describe('Entity', () => {

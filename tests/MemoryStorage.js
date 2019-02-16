@@ -8,9 +8,9 @@
 const expect = require('chai').expect;
 
 // the class to test
-const MemoryStorage = require('../index.js').MemoryStorage;
-const ObjectStore = require('../index.js').ObjectStore;
-const Entity = require('../index.js').Entity;
+const MemoryStorage     = require('../index.js').MemoryStorage;
+const ObjectStore       = require('../index.js').ObjectStore;
+const Entity            = require('../index.js').Entity;
 
 // a test entity class
 const A = class extends Entity { };

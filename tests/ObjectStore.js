@@ -8,8 +8,8 @@
 const expect = require('chai').expect;
 
 // the dependencies
-const ObjectStore = require('../lib/ObjectStore.js');
-const Entity = require('../lib/Entity.js');
+const ObjectStore   = require('../index.js').ObjectStore;
+const Entity        = require('../index.js').Entity;
 
 // helper classes
 class A extends Entity { };
