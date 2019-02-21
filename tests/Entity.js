@@ -8,7 +8,7 @@ const expect = require('chai').expect;
 
 // get the entity class 
 const Entity = require('../index.js').Entity;
-
+const ObjectStore = require('../index.js').ObjectStore;
 
 describe('Entity', () => {
 
@@ -34,6 +34,30 @@ describe('Entity', () => {
             let entity = new Entity({ id: 'hah' });
 
             expect(entity).to.have.property('id').that.is.equal('hah');
+        });
+    });
+
+    describe('.isStored', () => {
+    
+        it('should be true when the entity was stored', () => {
+
+            class A extends Entity { };
+
+            let os = new ObjectStore();
+            os.register(A);
+
+            let a = new A();
+
+            os.store(a);
+
+            expect(a.isStored).to.be.equal(true);
+        });
+
+        it('should be false when the entity is not stored', () => {
+
+            let e = new Entity();
+
+            expect(e.isStored).to.be.equal(false);
         });
     });
 
