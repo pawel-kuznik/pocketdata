@@ -239,6 +239,58 @@ describe('ConnectedEntities', () => {
         });
     });
 
+    describe('.build()', () => {
+
+        it('should create a new entity (but not yet stored', () => {
+
+            // get the object store
+            const store = getStore();
+            
+            // construct A
+            const a = store.create(A);
+
+            // construct a collection
+            const entities = new ConnectedEntities(a, B);
+
+            // build the entity
+            const b = entities.build();
+
+            // expect the entity in the collection
+            expect(entities.has(b)).to.be.equal(true);
+
+            // the entity should not be stored yet
+            expect(b.isStored).to.be.equal(false);
+        });
+    });
+
+    describe('.clean()', () => {
+
+        it('should clean any entities that are not yet stored from the collection', () => {
+
+            // get the object store
+            const store = getStore();
+            
+            // construct A
+            const a = store.create(A);
+
+            // construct a collection
+            const entities = new ConnectedEntities(a, B);
+
+            // create the entities
+            const b1 = entities.create();
+            const b2 = entities.build();
+
+            // clean the entities
+            entities.clean();
+
+            // one should remain
+            expect(Array.from(entities).length).to.be.equal(1);
+
+            // the one created
+            expect(entities.has(b1)).to.be.equal(true);
+        });
+    });
+
     describe('.delete()', () => {
     
         it('should remove an entity from the collection', () => {
@@ -336,9 +388,37 @@ describe('ConnectedEntities', () => {
             entities.attach(b);
 
             // iterate
-            for(let item of entities) {
+            for (let item of entities) {
 
                 // make sure the item is the same
+                expect(item).to.equal(b);
+
+                // we can iterate
+                done();
+            }
+        });
+
+        it('should allow iterration of entities supplied by ids', done => {
+
+            // get the store
+            const store = getStore();
+
+            // construct A
+            const a = store.create(A);
+
+            // construct a collection
+            const entities = new ConnectedEntities(a, B);
+
+            // construct new B
+            const b = store.create(B);
+
+            // populate the collection
+            entities.from([ b.id ]);
+
+            // iterate
+            for (let item of entities) {
+
+                // make sure the imte is the same
                 expect(item).to.equal(b);
 
                 // we can iterate
