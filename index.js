@@ -7,7 +7,6 @@
 module.exports = {
     Entity:             require('./lib/Entity.js').Entity,
     ConnectedEntities:  require('./lib/ConnectedEntities.js'),
-    Cache:              require('./lib/Cache.js'),
     ObjectStore:        require('./lib/ObjectStore.js'),
     Storage:            require('./lib/Storage.js'),
     MemoryStorage:      require('./lib/MemoryStorage.js'),
