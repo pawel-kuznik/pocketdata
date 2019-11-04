@@ -241,7 +241,7 @@ describe('ConnectedEntities', () => {
 
     describe('.build()', () => {
 
-        it('should create a new entity (but not yet stored', () => {
+        it('should create a new entity (but not yet stored)', () => {
 
             // get the object store
             const store = getStore();
@@ -255,8 +255,8 @@ describe('ConnectedEntities', () => {
             // build the entity
             const b = entities.build();
 
-            // expect the entity in the collection
-            expect(entities.has(b)).to.be.equal(true);
+            // the entity should not be in the collection yet
+            expect(entities.has(b)).to.be.equal(false);
 
             // the entity should not be stored yet
             expect(b.isStored).to.be.equal(false);
@@ -279,6 +279,9 @@ describe('ConnectedEntities', () => {
             // create the entities
             const b1 = entities.create();
             const b2 = entities.build();
+
+            // attach a non stored entity to the collection
+            entities.attach(b2);
 
             // clean the entities
             entities.clean();
