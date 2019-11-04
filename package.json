@@ -1,6 +1,6 @@
 {
   "name": "pocketdata",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An implementation for a object store. A small object store.",
   "main": "index.js",
   "directories": {
