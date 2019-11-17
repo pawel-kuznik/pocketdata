@@ -15,6 +15,24 @@ const Entity        = require('../index.js').Entity;
 class A extends Entity { };
 class B extends Entity { };
 
+const priv = Symbol('priv');
+class Dummy extends Entity {
+
+    constructor(data) {
+
+        super(data);
+
+        this[priv] = data.foo;
+    }
+
+    get foo () { return this[priv]; }
+
+    toPlainObject() {
+
+        return Object.assign(super.toPlainObject(), { foo: this.foo });
+    }
+}
+
 describe('ObjectStore', () => {
 
     describe('.register()', () => {
@@ -49,6 +67,19 @@ describe('ObjectStore', () => {
             // we should not be able to fetch the instance yet
             expect(aSecond).to.be.an('undefined');
         });
+
+        it('should pass seed data to the entity', () => {
+
+            // create a storage
+            let storage = new ObjectStore();
+            storage.register(Dummy, 'dummy');
+
+            // create an object right away
+            let dummy = storage.build(Dummy, { foo: 'init' });
+
+            // expect the data to assigned
+            expect(dummy.foo).to.equal('init');
+        });
     });
 
     describe('.create()', () => {
@@ -67,6 +98,19 @@ describe('ObjectStore', () => {
 
             // and make sure that we have the proper object with expected property
             expect(aSecond).to.be.instanceof(A).and.have.property('id').that.equals(a.id);
+        });
+
+        it('should pass seed data to the entity', () => {
+
+            // create a storage
+            let storage = new ObjectStore();
+            storage.register(Dummy, 'dummy');
+
+            // create an object right away
+            let dummy = storage.create(Dummy, { foo: 'init' });
+
+            // expect the data to assigned
+            expect(dummy.foo).to.equal('init');
         });
     });
 
