@@ -155,6 +155,16 @@ describe('ObjectStore', () => {
 
             expect(store.fetch(A, a.id)).to.equal(a);
         });
+
+        it ('should return an instance by id only', () => {
+
+            let store = new ObjectStore();
+            let a = new A();
+            store.register(A);
+            store.store(a);
+
+            expect(store.fetch(a.id)).to.equal(a);
+        });
     });
 
     describe('.fetchAll()', () => {
