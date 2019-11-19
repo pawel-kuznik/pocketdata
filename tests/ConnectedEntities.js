@@ -28,6 +28,24 @@ const getStore = () => {
 
 describe('ConnectedEntities', () => {
 
+    describe('.size', () => {
+
+        it('should start with zero', () => {
+
+            // get the object store
+            const store = getStore();
+            
+            // construct A
+            const a = store.create(A);
+
+            // construct a collection
+            const entities = new ConnectedEntities(a, B);
+
+            // expect the size to be 0
+            expect(entities.size).to.equal(0);
+        });
+    });
+
     describe('.root', () => {
 
         it('should expose the object store instance if properly initialize entity was passed in constructor', () => {
